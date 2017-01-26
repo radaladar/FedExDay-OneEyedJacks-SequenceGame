@@ -6,19 +6,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+//import javax.persistence.Entity;
+//import javax.persistence.Id;
+//import javax.persistence.Table;
 import java.util.List;
 
-@Entity
-@Table
+//@Entity
+//@Table
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 public class Player {
-    @Id
+//    @Id
     private int id;
     private String name;
     private List<Card> hand;
