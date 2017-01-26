@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <BorderPane prefHeight="346.0" prefWidth="600.0">
+         <center>
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="164.0" prefWidth="141.0" spacing="15.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="2 players" />
+                  <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="3 players" />
+                  <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="4 players" />
+                  <Button alignment="CENTER" mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="6 players" />
+               </children>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+            </VBox>
+         </center>
+         <top>
+            <VBox>
+               <children>
+                  <Label maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="112.0" prefWidth="627.0" text="Welcome to the newly designed virtual game of SEQUENCE!" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" wrapText="true">
+                     <font>
+                        <Font name="Calisto MT Bold" size="36.0" />
+                     </font>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop color="#3a9e64" />
+                              <Stop color="#073c35" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Label>
+                  <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="42.0" prefWidth="606.0" text="Please select player's mode:" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calisto MT" size="27.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </top>
+      </BorderPane>
+   </center>
+   <bottom>
+      <Label text="\@Copyright" BorderPane.alignment="CENTER_LEFT" />
+   </bottom>
+</BorderPane>
