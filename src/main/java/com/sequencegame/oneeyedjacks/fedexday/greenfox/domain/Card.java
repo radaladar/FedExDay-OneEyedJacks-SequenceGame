@@ -35,4 +35,9 @@ public class Card {
         Card cardTocompare = (Card) obj;
         return this.suit == cardTocompare.suit && this.name == cardTocompare.name;
     }
+
+    @Override
+    public String toString() {
+        return suit + name;
+    }
 }

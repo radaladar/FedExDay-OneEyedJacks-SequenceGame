@@ -31,8 +31,30 @@ public class Board {
     }
 
     public void placeChip(int x, int y, String color) {
-        BoardCard cardChipPlacedOn = boardCards[y][x];
+        BoardCard cardChipPlacedOn = getCardBasedOnCoordinates(x, y);
         cardChipPlacedOn.setHasChip(true);
         cardChipPlacedOn.setChipColor(color);
+    }
+
+    public BoardCard getCardBasedOnCoordinates(int x, int y) {
+        return boardCards[y][x];
+    }
+
+    public int[][] findCardOnBoard(String type) {
+        int[][] cardsCoordinates = new int[2][2];
+        int place = 0;
+        for (int i = 0; i < boardMap.length; i++) {
+            for (int j = 0; j < boardMap[i].length; j++) {
+                if (boardMap[i][j].equals(type)) {
+                    cardsCoordinates[place] = new int[]{i, j};
+                    place++;
+                }
+            }
+        }
+        return cardsCoordinates;
+    }
+
+    public boolean isCardisOccupied(int x, int y) {
+        return getCardBasedOnCoordinates(x, y).getHasChip();
     }
 }

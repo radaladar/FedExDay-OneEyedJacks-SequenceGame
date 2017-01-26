@@ -1,10 +1,7 @@
 /// Created by BB on 2017-01-26.
 package com.sequencegame.oneeyedjacks.fedexday.greenfox.service;
 
-import com.sequencegame.oneeyedjacks.fedexday.greenfox.domain.Board;
-import com.sequencegame.oneeyedjacks.fedexday.greenfox.domain.Deck;
-import com.sequencegame.oneeyedjacks.fedexday.greenfox.domain.Player;
-import com.sequencegame.oneeyedjacks.fedexday.greenfox.domain.Team;
+import com.sequencegame.oneeyedjacks.fedexday.greenfox.domain.*;
 
 public class GameLogic {
 
@@ -28,10 +25,17 @@ public class GameLogic {
         board.placeChip(x, y, activeTeam().getColor());
     }
 
+    public boolean isDumpingDeadCardAllowed(int index) {
+        DeckCard card = activeTeam().getActivePlayer().getHand().get(index);
+        int[][] placesTocheck = board.findCardOnBoard(card.toString());
+        return board.isCardisOccupied(placesTocheck[0][0], placesTocheck[0][1]) && board.isCardisOccupied(placesTocheck[1][0], placesTocheck[1][1]);
+    }
+
     private Team activeTeam() {
         return greenTeam;
     }
-    public boolean isThereASequenceWithTheLastChipPutDown(int team, int[][] array, int x, int y){
+
+    public boolean isThereASequenceWithTheLastChipPutDown(int team, int[][] array, int x, int y) {
         return checkHorizontal(team, array, y) || checkVertical(team, array, x) || checkDiagonal(team, array, x, y);
     }
 
@@ -42,30 +46,32 @@ public class GameLogic {
                 break;
             } else if (array[y][i] == team) {
                 counter++;
-            }  else {
+            } else {
                 counter = 0;
             }
         }
         return counter == 5;
     }
-    public static boolean checkVertical(int team, int[][]array, int x) {
+
+    public static boolean checkVertical(int team, int[][] array, int x) {
         int counter = 0;
         for (int i = 0; i < 10; i++) {
             if (counter == 5) {
                 break;
             } else if (array[i][x] == team) {
                 counter++;
-            }  else {
+            } else {
                 counter = 0;
             }
         }
         return counter == 5;
     }
-    public static boolean checkDiagonal(int team, int[][]array, int x, int y){
+
+    public static boolean checkDiagonal(int team, int[][] array, int x, int y) {
         return checkDiagonalLeftToRight(team, array, x, y) || checkDiagonalRightToLeft(team, array, x, y);
     }
 
-    private static boolean checkDiagonalLeftToRight(int team, int[][]array, int x, int y) {
+    private static boolean checkDiagonalLeftToRight(int team, int[][] array, int x, int y) {
         int counter = 0;
         int startFromHereVertical = y;
         int startFromHereHorizontal = x;
@@ -77,12 +83,12 @@ public class GameLogic {
                 (startFromHereHorizontal > 5 && startFromHereVertical == 0)) {
             return false;
         } else {
-            for (int i = 0; startFromHereVertical + i < 10 && startFromHereHorizontal + i < 10 ; i++) {
+            for (int i = 0; startFromHereVertical + i < 10 && startFromHereHorizontal + i < 10; i++) {
                 if (counter == 5) {
                     break;
                 } else if (array[startFromHereVertical + i][startFromHereHorizontal + i] == team) {
                     counter++;
-                }  else {
+                } else {
                     counter = 0;
                 }
             }
@@ -90,7 +96,7 @@ public class GameLogic {
         }
     }
 
-    private static boolean checkDiagonalRightToLeft(int team, int[][]array, int x, int y) {
+    private static boolean checkDiagonalRightToLeft(int team, int[][] array, int x, int y) {
         int counter = 0;
         int startFromHereVertical = y;
         int startFromHereHorizontal = x;
@@ -102,12 +108,12 @@ public class GameLogic {
                 || (startFromHereHorizontal == 9 && startFromHereVertical > 5)) {
             return false;
         } else {
-            for (int i = 0; startFromHereVertical + i < 10 && startFromHereHorizontal - i >= 0 ; i++) {
+            for (int i = 0; startFromHereVertical + i < 10 && startFromHereHorizontal - i >= 0; i++) {
                 if (counter == 5) {
                     break;
                 } else if (array[startFromHereVertical + i][startFromHereHorizontal - i] == team) {
                     counter++;
-                }  else {
+                } else {
                     counter = 0;
                 }
             }
