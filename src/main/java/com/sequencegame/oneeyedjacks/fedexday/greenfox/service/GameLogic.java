@@ -2,10 +2,14 @@
 package com.sequencegame.oneeyedjacks.fedexday.greenfox.service;
 
 import com.sequencegame.oneeyedjacks.fedexday.greenfox.domain.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
+@Getter
+@Setter
 public class GameLogic {
 
     private Board board;
@@ -14,6 +18,7 @@ public class GameLogic {
     private Team redTeam;
     private Deck deck;
     private int numberOfTeam;
+    private int[] lastMove;
     public static int round;
 
     public GameLogic(int numberOfPlayer) {
@@ -41,25 +46,65 @@ public class GameLogic {
         }
     }
 
-    public void playCard(int index) {
-        Player activePlyer = activeTeam().getActivePlayer();
-        activePlyer.playCard(index);
-        if (activePlyer.getNumberOfCardsInHand() < 6 && deck.getNumberOfCardsRemaining() > 0) {
-            activePlyer.addNewCardToHand(deck.drawCard());
+    public boolean isWon() {
+        placeChipsOnCorners();
+        if (isThereASequenceWithTheLastChipPutDown(lastMove[0], lastMove[1])) {
+            getActiveTeam().increaseSequence();
+        }
+        clearCorners();
+        if (numberOfTeam == 2) {
+            return getActiveTeam().getSequence() == 2;
+        } else {
+            return getActiveTeam().getSequence() == 1;
+        }
+    }
+
+    public Card playCard(int index) {
+        Player activePlayer = getActiveTeam().getActivePlayer();
+        Card cardPlayed = activePlayer.playCard(index);
+        if (activePlayer.getNumberOfCardsInHand() < 6 && deck.getNumberOfCardsRemaining() > 0) {
+            activePlayer.addNewCardToHand(deck.drawCard());
+        }
+        return cardPlayed;
+    }
+
+    public void dumpCard(int index) {
+        if (isDumpingDeadCardAllowed(index)) {
+            Card cardRemoved = playCard(index);
         }
     }
 
     public void placeChip(int x, int y) {
-        board.placeChip(x, y, activeTeam().getColorCode());
+        board.placeChip(x, y, getActiveTeam().getColorCode());
+        lastMove = new int[]{x, y};
+    }
+
+    public void removeChip(int x, int y) {
+        board.placeChip(x, y, 0);
+        lastMove = new int[]{x, y};
+    }
+
+    private void placeChipsOnCorners() {
+        placeChip(0, 0);
+        placeChip(0, 9);
+        placeChip(9, 0);
+        placeChip(9, 9);
+    }
+
+    private void clearCorners() {
+        removeChip(0, 0);
+        removeChip(0, 9);
+        removeChip(9, 0);
+        removeChip(9, 9);
     }
 
     public boolean isDumpingDeadCardAllowed(int index) {
-        Card card = activeTeam().getActivePlayer().getHand().get(index);
+        Card card = getActiveTeam().getActivePlayer().getHand().get(index);
         int[][] placesTocheck = board.findCardOnBoard(card.toString());
         return board.isCardisOccupied(placesTocheck[0][0], placesTocheck[0][1]) && board.isCardisOccupied(placesTocheck[1][0], placesTocheck[1][1]);
     }
 
-    private Team activeTeam() {
+    private Team getActiveTeam() {
         if (round % numberOfTeam == 0) {
             return greenTeam;
         } else if (round % numberOfTeam == 0) {
@@ -69,16 +114,16 @@ public class GameLogic {
         }
     }
 
-    public boolean isThereASequenceWithTheLastChipPutDown(int teamColorCode, int x, int y) {
-        return checkHorizontal(teamColorCode, y) || checkVertical(teamColorCode, x) || checkDiagonal(teamColorCode, x, y);
+    public boolean isThereASequenceWithTheLastChipPutDown(int x, int y) {
+        return checkHorizontal(y) || checkVertical(x) || checkDiagonal(x, y);
     }
 
-    private boolean checkHorizontal(int teamColorCode, int y) {
+    private boolean checkHorizontal(int y) {
         int counter = 0;
         for (int i = 0; i < 10; i++) {
             if (counter == 5) {
                 break;
-            } else if (board.getColorCodesForChips()[y][i] == teamColorCode) {
+            } else if (board.getColorCodesForChips()[y][i] == getActiveTeam().getColorCode()) {
                 counter++;
             } else {
                 counter = 0;
@@ -87,12 +132,12 @@ public class GameLogic {
         return counter == 5;
     }
 
-    private boolean checkVertical(int teamColorCode, int x) {
+    private boolean checkVertical(int x) {
         int counter = 0;
         for (int i = 0; i < 10; i++) {
             if (counter == 5) {
                 break;
-            } else if (board.getColorCodesForChips()[i][x] == teamColorCode) {
+            } else if (board.getColorCodesForChips()[i][x] == getActiveTeam().getColorCode()) {
                 counter++;
             } else {
                 counter = 0;
@@ -101,11 +146,11 @@ public class GameLogic {
         return counter == 5;
     }
 
-    private boolean checkDiagonal(int teamColorCode, int x, int y) {
-        return checkDiagonalLeftToRight(teamColorCode, x, y) || checkDiagonalRightToLeft(teamColorCode, x, y);
+    private boolean checkDiagonal(int x, int y) {
+        return checkDiagonalLeftToRight(x, y) || checkDiagonalRightToLeft(x, y);
     }
 
-    private boolean checkDiagonalLeftToRight(int teamColorCode, int x, int y) {
+    private boolean checkDiagonalLeftToRight(int x, int y) {
         int counter = 0;
         int startFromHereVertical = y;
         int startFromHereHorizontal = x;
@@ -120,7 +165,7 @@ public class GameLogic {
             for (int i = 0; startFromHereVertical + i < 10 && startFromHereHorizontal + i < 10; i++) {
                 if (counter == 5) {
                     break;
-                } else if (board.getColorCodesForChips()[startFromHereVertical + i][startFromHereHorizontal + i] == teamColorCode) {
+                } else if (board.getColorCodesForChips()[startFromHereVertical + i][startFromHereHorizontal + i] == getActiveTeam().getColorCode()) {
                     counter++;
                 } else {
                     counter = 0;
@@ -130,7 +175,7 @@ public class GameLogic {
         }
     }
 
-    private boolean checkDiagonalRightToLeft(int teamColorCode, int x, int y) {
+    private boolean checkDiagonalRightToLeft(int x, int y) {
         int counter = 0;
         int startFromHereVertical = y;
         int startFromHereHorizontal = x;
@@ -145,7 +190,7 @@ public class GameLogic {
             for (int i = 0; startFromHereVertical + i < 10 && startFromHereHorizontal - i >= 0; i++) {
                 if (counter == 5) {
                     break;
-                } else if (board.getColorCodesForChips()[startFromHereVertical + i][startFromHereHorizontal - i] == teamColorCode) {
+                } else if (board.getColorCodesForChips()[startFromHereVertical + i][startFromHereHorizontal - i] == getActiveTeam().getColorCode()) {
                     counter++;
                 } else {
                     counter = 0;

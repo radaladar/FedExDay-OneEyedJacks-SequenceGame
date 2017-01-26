@@ -36,4 +36,8 @@ public class Team {
         }
         return activePlayer;
     }
+
+    public void increaseSequence() {
+        sequence++;
+    }
 }
