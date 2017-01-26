@@ -9,7 +9,7 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table
@@ -21,6 +21,19 @@ public class Player {
     @Id
     private int id;
     private String name;
-    private String teamColor;
-    private ArrayList<Card> hand;
+    private List<DeckCard> hand;
+
+    public void addNewCardToHand(DeckCard card) {
+        hand.add(card);
+    }
+
+    public DeckCard playCard(int index) {
+        DeckCard cardPlayed = hand.get(index);
+        hand.remove(cardPlayed);
+        return cardPlayed;
+    }
+
+    public int getNumberOfCardsInHand() {
+        return hand.size();
+    }
 }

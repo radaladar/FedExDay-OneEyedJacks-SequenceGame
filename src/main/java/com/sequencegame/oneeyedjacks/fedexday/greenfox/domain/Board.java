@@ -2,7 +2,7 @@
 package com.sequencegame.oneeyedjacks.fedexday.greenfox.domain;
 
 public class Board {
-    static String[][] boardCards = new String[][]{
+    static String[][] boardMap = new String[][]{
             {"WC", "♠2", "♠3", "♠4", "♠5", "♠6", "♠7", "♠8", "♠9", "WC"},
             {"♣6", "♣5", "♣4", "♣3", "♣2", "♥A", "♥K", "♥Q", "♥10", "♠10"},
             {"♣7", "♠A", "♦2", "♦3", "♦4", "♦5", "♦6", "♦7", "♥9", "♠Q"},
@@ -14,4 +14,25 @@ public class Board {
             {"♣A", "♠7", "♠6", "♠5", "♠4", "♠3", "♠2", "♥2", "♥3", "♦5"},
             {"WC", "♦A", "♦K", "♦Q", "♦10", "♦9", "♦8", "♦7", "♦6", "WC"}
     };
+
+    private BoardCard[][] boardCards;
+
+    public Board() {
+        boardCards = new BoardCard[boardMap.length][boardMap[0].length];
+        populateBoard();
+    }
+
+    private void populateBoard() {
+        for (int i = 0; i < boardMap.length; i++) {
+            for (int j = 0; j < boardMap[i].length; j++) {
+                boardCards[i][j] = new BoardCard(boardMap[i][j]);
+            }
+        }
+    }
+
+    public void placeChip(int x, int y, String color) {
+        BoardCard cardChipPlacedOn = boardCards[y][x];
+        cardChipPlacedOn.setHasChip(true);
+        cardChipPlacedOn.setChipColor(color);
+    }
 }
