@@ -16,10 +16,8 @@ public class Board {
     };
 
     private BoardCard[][] boardCards;
-    private Deck deck;
 
     public Board() {
-        deck = new Deck();
         boardCards = new BoardCard[boardMap.length][boardMap[0].length];
         populateBoard();
     }
@@ -30,5 +28,11 @@ public class Board {
                 boardCards[i][j] = new BoardCard(boardMap[i][j]);
             }
         }
+    }
+
+    public void placeChip(int x, int y, String color) {
+        BoardCard cardChipPlacedOn = boardCards[y][x];
+        cardChipPlacedOn.setHasChip(true);
+        cardChipPlacedOn.setChipColor(color);
     }
 }

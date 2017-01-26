@@ -26,4 +26,14 @@ public class Player {
     public void addNewCardToHand(DeckCard card) {
         hand.add(card);
     }
+
+    public DeckCard playCard(int index) {
+        DeckCard cardPlayed = hand.get(index);
+        hand.remove(cardPlayed);
+        return cardPlayed;
+    }
+
+    private int getNumberOfCardsInHand() {
+        return hand.size();
+    }
 }

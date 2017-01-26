@@ -15,13 +15,25 @@ public class Team {
     private String color;
     private List<Player> players;
     private int sequence;
+    private int currentlyActivePlayer;
 
     public Team() {
         players = new ArrayList<>();
         sequence = 0;
+        currentlyActivePlayer = 0;
     }
 
     public void addNewPlayer(Player player) {
         players.add(player);
+    }
+
+    public Player getActivePlayer() {
+        Player activePlayer = players.get(currentlyActivePlayer);
+        if (currentlyActivePlayer < players.size() - 1) {
+            currentlyActivePlayer++;
+        } else {
+            currentlyActivePlayer = 0;
+        }
+        return activePlayer;
     }
 }

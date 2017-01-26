@@ -14,5 +14,7 @@ public class BoardCard extends Card {
 
     public BoardCard(String typeGivenBySpecialCharacterAndNumber) {
         super(typeGivenBySpecialCharacterAndNumber);
+        hasChip = false;
+        chipColor = "";
     }
 }
