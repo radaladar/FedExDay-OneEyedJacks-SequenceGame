@@ -107,7 +107,7 @@ public class GameLogic {
     private Team getActiveTeam() {
         if (round % numberOfTeam == 0) {
             return greenTeam;
-        } else if (round % numberOfTeam == 0) {
+        } else if (round % numberOfTeam == 1) {
             return blueTeam;
         } else {
             return redTeam;

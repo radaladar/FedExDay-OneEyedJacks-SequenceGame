@@ -2,6 +2,7 @@
 package com.sequencegame.oneeyedjacks.fedexday.greenfox.domain;
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 public class Board {
@@ -19,6 +20,7 @@ public class Board {
     };
 
     private Card[][] boardCards;
+    @Setter
     private int[][] colorCodesForChips;
 
     public Board() {
