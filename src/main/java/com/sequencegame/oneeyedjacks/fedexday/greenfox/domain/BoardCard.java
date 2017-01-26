@@ -11,4 +11,8 @@ import lombok.Setter;
 public class BoardCard extends Card {
     private Boolean hasChip;
     private String chipColor;
+
+    public BoardCard(String typeGivenBySpecialCharacterAndNumber) {
+        super(typeGivenBySpecialCharacterAndNumber);
+    }
 }
