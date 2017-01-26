@@ -22,11 +22,11 @@ public class GameLogic {
     }
 
     public void placeChip(int x, int y) {
-        board.placeChip(x, y, activeTeam().getColor());
+        board.placeChip(x, y, activeTeam().getColorCode());
     }
 
     public boolean isDumpingDeadCardAllowed(int index) {
-        DeckCard card = activeTeam().getActivePlayer().getHand().get(index);
+        Card card = activeTeam().getActivePlayer().getHand().get(index);
         int[][] placesTocheck = board.findCardOnBoard(card.toString());
         return board.isCardisOccupied(placesTocheck[0][0], placesTocheck[0][1]) && board.isCardisOccupied(placesTocheck[1][0], placesTocheck[1][1]);
     }
@@ -35,16 +35,16 @@ public class GameLogic {
         return greenTeam;
     }
 
-    public boolean isThereASequenceWithTheLastChipPutDown(int team, int[][] array, int x, int y) {
-        return checkHorizontal(team, array, y) || checkVertical(team, array, x) || checkDiagonal(team, array, x, y);
+    public boolean isThereASequenceWithTheLastChipPutDown(int teamColorCode, int x, int y) {
+        return checkHorizontal(teamColorCode, y) || checkVertical(teamColorCode, x) || checkDiagonal(teamColorCode, x, y);
     }
 
-    public static boolean checkHorizontal(int team, int[][] array, int y) {
+    public boolean checkHorizontal(int teamColorCode, int y) {
         int counter = 0;
         for (int i = 0; i < 10; i++) {
             if (counter == 5) {
                 break;
-            } else if (array[y][i] == team) {
+            } else if (board.getColorCodesForChips()[y][i] == teamColorCode) {
                 counter++;
             } else {
                 counter = 0;
@@ -53,12 +53,12 @@ public class GameLogic {
         return counter == 5;
     }
 
-    public static boolean checkVertical(int team, int[][] array, int x) {
+    public boolean checkVertical(int teamColorCode, int x) {
         int counter = 0;
         for (int i = 0; i < 10; i++) {
             if (counter == 5) {
                 break;
-            } else if (array[i][x] == team) {
+            } else if (board.getColorCodesForChips()[i][x] == teamColorCode) {
                 counter++;
             } else {
                 counter = 0;
@@ -67,11 +67,11 @@ public class GameLogic {
         return counter == 5;
     }
 
-    public static boolean checkDiagonal(int team, int[][] array, int x, int y) {
-        return checkDiagonalLeftToRight(team, array, x, y) || checkDiagonalRightToLeft(team, array, x, y);
+    public boolean checkDiagonal(int team, int x, int y) {
+        return checkDiagonalLeftToRight(team, x, y) || checkDiagonalRightToLeft(team, x, y);
     }
 
-    private static boolean checkDiagonalLeftToRight(int team, int[][] array, int x, int y) {
+    private boolean checkDiagonalLeftToRight(int team, int x, int y) {
         int counter = 0;
         int startFromHereVertical = y;
         int startFromHereHorizontal = x;
@@ -86,7 +86,7 @@ public class GameLogic {
             for (int i = 0; startFromHereVertical + i < 10 && startFromHereHorizontal + i < 10; i++) {
                 if (counter == 5) {
                     break;
-                } else if (array[startFromHereVertical + i][startFromHereHorizontal + i] == team) {
+                } else if (board.getColorCodesForChips()[startFromHereVertical + i][startFromHereHorizontal + i] == team) {
                     counter++;
                 } else {
                     counter = 0;
@@ -96,7 +96,7 @@ public class GameLogic {
         }
     }
 
-    private static boolean checkDiagonalRightToLeft(int team, int[][] array, int x, int y) {
+    private boolean checkDiagonalRightToLeft(int team, int x, int y) {
         int counter = 0;
         int startFromHereVertical = y;
         int startFromHereHorizontal = x;
@@ -111,7 +111,7 @@ public class GameLogic {
             for (int i = 0; startFromHereVertical + i < 10 && startFromHereHorizontal - i >= 0; i++) {
                 if (counter == 5) {
                     break;
-                } else if (array[startFromHereVertical + i][startFromHereHorizontal - i] == team) {
+                } else if (board.getColorCodesForChips()[startFromHereVertical + i][startFromHereHorizontal - i] == team) {
                     counter++;
                 } else {
                     counter = 0;

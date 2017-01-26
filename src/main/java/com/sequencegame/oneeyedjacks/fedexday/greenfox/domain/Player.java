@@ -21,14 +21,14 @@ public class Player {
     @Id
     private int id;
     private String name;
-    private List<DeckCard> hand;
+    private List<Card> hand;
 
-    public void addNewCardToHand(DeckCard card) {
+    public void addNewCardToHand(Card card) {
         hand.add(card);
     }
 
-    public DeckCard playCard(int index) {
-        DeckCard cardPlayed = hand.get(index);
+    public Card playCard(int index) {
+        Card cardPlayed = hand.get(index);
         hand.remove(cardPlayed);
         return cardPlayed;
     }

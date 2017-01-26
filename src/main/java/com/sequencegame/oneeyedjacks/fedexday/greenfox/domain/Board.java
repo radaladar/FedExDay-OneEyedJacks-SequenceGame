@@ -1,6 +1,9 @@
 /// Created by BB on 2017-01-26.
 package com.sequencegame.oneeyedjacks.fedexday.greenfox.domain;
 
+import lombok.Getter;
+
+@Getter
 public class Board {
     static String[][] boardMap = new String[][]{
             {"WC", "♠2", "♠3", "♠4", "♠5", "♠6", "♠7", "♠8", "♠9", "WC"},
@@ -15,28 +18,28 @@ public class Board {
             {"WC", "♦A", "♦K", "♦Q", "♦10", "♦9", "♦8", "♦7", "♦6", "WC"}
     };
 
-    private BoardCard[][] boardCards;
+    private Card[][] boardCards;
+    private int[][] colorCodesForChips;
 
     public Board() {
-        boardCards = new BoardCard[boardMap.length][boardMap[0].length];
+        boardCards = new Card[boardMap.length][boardMap[0].length];
+        colorCodesForChips = new int[10][10];
         populateBoard();
     }
 
     private void populateBoard() {
         for (int i = 0; i < boardMap.length; i++) {
             for (int j = 0; j < boardMap[i].length; j++) {
-                boardCards[i][j] = new BoardCard(boardMap[i][j]);
+                boardCards[i][j] = new Card(boardMap[i][j]);
             }
         }
     }
 
-    public void placeChip(int x, int y, String color) {
-        BoardCard cardChipPlacedOn = getCardBasedOnCoordinates(x, y);
-        cardChipPlacedOn.setHasChip(true);
-        cardChipPlacedOn.setChipColor(color);
+    public void placeChip(int x, int y, int colorCode) {
+        colorCodesForChips[y][x] = colorCode;
     }
 
-    public BoardCard getCardBasedOnCoordinates(int x, int y) {
+    public Card getCardBasedOnCoordinates(int x, int y) {
         return boardCards[y][x];
     }
 
@@ -55,6 +58,6 @@ public class Board {
     }
 
     public boolean isCardisOccupied(int x, int y) {
-        return getCardBasedOnCoordinates(x, y).getHasChip();
+        return colorCodesForChips[y][x] != 0;
     }
 }

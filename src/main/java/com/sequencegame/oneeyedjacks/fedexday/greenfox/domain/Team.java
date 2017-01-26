@@ -12,7 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 public class Team {
-    private String color;
+    private int colorCode;
     private List<Player> players;
     private int sequence;
     private int currentlyActivePlayer;
