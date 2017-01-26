@@ -33,7 +33,7 @@ public class Player {
         return cardPlayed;
     }
 
-    private int getNumberOfCardsInHand() {
+    public int getNumberOfCardsInHand() {
         return hand.size();
     }
 }

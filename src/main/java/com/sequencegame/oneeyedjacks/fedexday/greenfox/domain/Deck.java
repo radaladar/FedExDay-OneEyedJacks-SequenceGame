@@ -46,4 +46,8 @@ public class Deck {
             return null;
         }
     }
+
+    public int getNumberOfCardsRemaining() {
+        return cards.size();
+    }
 }

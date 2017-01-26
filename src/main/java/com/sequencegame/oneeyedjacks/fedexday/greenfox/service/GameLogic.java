@@ -18,6 +18,9 @@ public class GameLogic {
     public void playCard(int index) {
         Player activePlyer = activeTeam().getActivePlayer();
         activePlyer.playCard(index);
+        if (activePlyer.getNumberOfCardsInHand() < 6 && deck.getNumberOfCardsRemaining() > 0) {
+            activePlyer.addNewCardToHand(deck.drawCard());
+        }
     }
 
     public void placeChip(int x, int y) {
