@@ -14,14 +14,11 @@ public class Card {
     private int id;
     private String suit;
     private String name;
-    private String value;
     private Boolean hasChip;
     private String chipColor;
 
-    public Card(int id, String suit, String name, String value) {
-        this.id = id;
+    public Card(String suit, String name) {
         this.suit = suit;
         this.name = name;
-        this.value = value;
     }
 }
