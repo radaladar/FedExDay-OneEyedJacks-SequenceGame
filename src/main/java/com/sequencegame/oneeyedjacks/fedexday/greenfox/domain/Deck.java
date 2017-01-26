@@ -23,7 +23,7 @@ public class Deck {
             "J2", "J2", "J2", "J2"
     };
 
-    private List<DeckCard> cards;
+    private List<Card> cards;
 
     public Deck() {
         cards = new ArrayList<>();
@@ -33,13 +33,13 @@ public class Deck {
 
     private void populateDeck() {
         for (String cardType : deckMap) {
-            cards.add(new DeckCard(cardType));
+            cards.add(new Card(cardType));
         }
     }
 
-    public DeckCard drawCard() {
+    public Card drawCard() {
         if (cards.size() > 0) {
-            DeckCard cardDrawn = cards.get(0);
+            Card cardDrawn = cards.get(0);
             cards.remove(cardDrawn);
             return cardDrawn;
         } else {

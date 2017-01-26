@@ -12,12 +12,12 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication
 public class SequencegameApplication extends Application {
 
-	private ConfigurableApplicationContext springContext;
-	private Parent rootNode;
+    private ConfigurableApplicationContext springContext;
+    private Parent rootNode;
 
-	public static void main(String[] args) {
-		Application.launch(args);
-	}
+    public static void main(String[] args) {
+        Application.launch(args);
+    }
 
 	@Override
 	public void init() throws Exception {
@@ -31,5 +31,5 @@ public class SequencegameApplication extends Application {
 		stage.setScene(new Scene(rootNode));
 		stage.show();
 	}
-	
+
 }
