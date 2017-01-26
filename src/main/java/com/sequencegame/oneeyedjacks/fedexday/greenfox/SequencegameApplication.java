@@ -22,9 +22,7 @@ public class SequencegameApplication extends Application {
 	@Override
 	public void init() throws Exception {
 		springContext = SpringApplication.run(SequencegameApplication.class);
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
-				///ide jön a resources mappa;
-		));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
 		fxmlLoader.setControllerFactory(springContext::getBean);
 		rootNode = fxmlLoader.load();
 	}
