@@ -1,6 +1,7 @@
 package com.sequencegame.oneeyedjacks.fedexday.greenfox;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -30,6 +31,7 @@ public class SequencegameApplication extends Application {
 	public void start(Stage stage) throws Exception {
 		stage.setScene(new Scene(rootNode));
 		stage.show();
+		stage.setOnCloseRequest(e -> Platform.exit());
 	}
 
 }
