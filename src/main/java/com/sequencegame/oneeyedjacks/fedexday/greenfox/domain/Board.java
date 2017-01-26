@@ -2,7 +2,7 @@
 package com.sequencegame.oneeyedjacks.fedexday.greenfox.domain;
 
 public class Board {
-    static String[][] boardCards = new String[][] {
+    static String[][] boardCards = new String[][]{
             {"WC", "♠2", "♠3", "♠4", "♠5", "♠6", "♠7", "♠8", "♠9", "WC"},
             {"♣6", "♣5", "♣4", "♣3", "♣2", "♥A", "♥K", "♥Q", "♥10", "♠10"},
             {"♣7", "♠A", "♦2", "♦3", "♦4", "♦5", "♦6", "♦7", "♥9", "♠Q"},
@@ -13,5 +13,5 @@ public class Board {
             {"♣K", "♠8", "♣10", "♣Q", "♣K", "♣A", "♦A", "♦K", "♥4", "♦4"},
             {"♣A", "♠7", "♠6", "♠5", "♠4", "♠3", "♠2", "♥2", "♥3", "♦5"},
             {"WC", "♦A", "♦K", "♦Q", "♦10", "♦9", "♦8", "♦7", "♦6", "WC"}
-    }
+    };
 }
