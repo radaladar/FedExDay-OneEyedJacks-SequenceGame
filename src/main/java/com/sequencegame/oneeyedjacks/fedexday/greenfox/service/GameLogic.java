@@ -3,6 +3,7 @@ package com.sequencegame.oneeyedjacks.fedexday.greenfox.service;
 
 import com.sequencegame.oneeyedjacks.fedexday.greenfox.domain.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.Arrays;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class GameLogic {
 
     private Board board;
@@ -22,6 +24,10 @@ public class GameLogic {
     public static int round = 0;
     private int[][] tempSequenceHolderForPlayer1;
     private int[][] tempSequenceHolderForPlayer2;
+
+    public GameLogic(int numberOfPlayer, String aaa){
+        numberOfTeam = 2;
+    }
 
     public GameLogic(int numberOfPlayer) {
         board = new Board();
