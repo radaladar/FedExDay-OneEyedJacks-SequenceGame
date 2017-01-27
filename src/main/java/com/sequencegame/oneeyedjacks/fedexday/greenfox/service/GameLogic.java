@@ -20,6 +20,8 @@ public class GameLogic {
     private int numberOfTeam;
     private int[] lastMove;
     public static int round = 0;
+    private int[][] tempSequenceHolderForPlayer1;
+    private int[][] tempSequenceHolderForPlayer2;
 
     public GameLogic(int numberOfPlayer) {
         board = new Board();
@@ -120,13 +122,28 @@ public class GameLogic {
 
     private boolean checkHorizontal(int y) {
         int counter = 0;
+        int[][] localSequenceHolder = new int[5][2];
         for (int i = 0; i < 10; i++) {
             if (counter == 5) {
+                if (numberOfTeam == 2) {
+                    if (getActiveTeam().getColorCode() == 1 && getActiveTeam().getSequence() == 0) {
+                        tempSequenceHolderForPlayer1 = localSequenceHolder;
+                    } else if (getActiveTeam().getColorCode() == 1 && getActiveTeam().getSequence() == 1) {
+                        return !Arrays.equals(localSequenceHolder, tempSequenceHolderForPlayer1);
+                    }
+                    if (getActiveTeam().getColorCode() == 2 && getActiveTeam().getSequence() == 0) {
+                        tempSequenceHolderForPlayer2 = localSequenceHolder;
+                    } else if (getActiveTeam().getColorCode() == 2 && getActiveTeam().getSequence() == 1) {
+                        return !Arrays.equals(localSequenceHolder, tempSequenceHolderForPlayer2);
+                    }
+                }
                 break;
             } else if (board.getColorCodesForChips()[y][i] == getActiveTeam().getColorCode()) {
+                localSequenceHolder[counter] = new int[]{y, i};
                 counter++;
             } else {
                 counter = 0;
+                Arrays.fill(localSequenceHolder, null);
             }
         }
         return counter == 5;
@@ -134,13 +151,28 @@ public class GameLogic {
 
     private boolean checkVertical(int x) {
         int counter = 0;
+        int[][] localSequenceHolder = new int[5][2];
         for (int i = 0; i < 10; i++) {
             if (counter == 5) {
+                if (numberOfTeam == 2) {
+                    if (getActiveTeam().getColorCode() == 1 && getActiveTeam().getSequence() == 0) {
+                        tempSequenceHolderForPlayer1 = localSequenceHolder;
+                    } else if (getActiveTeam().getColorCode() == 1 && getActiveTeam().getSequence() == 1) {
+                        return !Arrays.equals(localSequenceHolder, tempSequenceHolderForPlayer1);
+                    }
+                    if (getActiveTeam().getColorCode() == 2 && getActiveTeam().getSequence() == 0) {
+                        tempSequenceHolderForPlayer2 = localSequenceHolder;
+                    } else if (getActiveTeam().getColorCode() == 2 && getActiveTeam().getSequence() == 1) {
+                        return !Arrays.equals(localSequenceHolder, tempSequenceHolderForPlayer2);
+                    }
+                }
                 break;
             } else if (board.getColorCodesForChips()[i][x] == getActiveTeam().getColorCode()) {
+                localSequenceHolder[counter] = new int[]{i, x};
                 counter++;
             } else {
                 counter = 0;
+                Arrays.fill(localSequenceHolder, null);
             }
         }
         return counter == 5;
@@ -154,6 +186,7 @@ public class GameLogic {
         int counter = 0;
         int startFromHereVertical = y;
         int startFromHereHorizontal = x;
+        int[][] localSequenceHolder = new int[5][2];
         while (startFromHereHorizontal > 0 && startFromHereVertical > 0) {
             startFromHereVertical--;
             startFromHereHorizontal--;
@@ -164,11 +197,25 @@ public class GameLogic {
         } else {
             for (int i = 0; startFromHereVertical + i < 10 && startFromHereHorizontal + i < 10; i++) {
                 if (counter == 5) {
+                    if (numberOfTeam == 2) {
+                        if (getActiveTeam().getColorCode() == 1 && getActiveTeam().getSequence() == 0) {
+                            tempSequenceHolderForPlayer1 = localSequenceHolder;
+                        } else if (getActiveTeam().getColorCode() == 1 && getActiveTeam().getSequence() == 1) {
+                            return !Arrays.equals(localSequenceHolder, tempSequenceHolderForPlayer1);
+                        }
+                        if (getActiveTeam().getColorCode() == 2 && getActiveTeam().getSequence() == 0) {
+                            tempSequenceHolderForPlayer2 = localSequenceHolder;
+                        } else if (getActiveTeam().getColorCode() == 2 && getActiveTeam().getSequence() == 1) {
+                            return !Arrays.equals(localSequenceHolder, tempSequenceHolderForPlayer2);
+                        }
+                    }
                     break;
                 } else if (board.getColorCodesForChips()[startFromHereVertical + i][startFromHereHorizontal + i] == getActiveTeam().getColorCode()) {
+                    localSequenceHolder[counter] = new int[]{startFromHereVertical + i, startFromHereHorizontal + i};
                     counter++;
                 } else {
                     counter = 0;
+                    Arrays.fill(localSequenceHolder, null);
                 }
             }
             return counter == 5;
@@ -179,6 +226,7 @@ public class GameLogic {
         int counter = 0;
         int startFromHereVertical = y;
         int startFromHereHorizontal = x;
+        int[][] localSequenceHolder = new int[5][2];
         while (startFromHereVertical > 0 && startFromHereHorizontal != 9) {
             startFromHereVertical--;
             startFromHereHorizontal++;
@@ -189,8 +237,21 @@ public class GameLogic {
         } else {
             for (int i = 0; startFromHereVertical + i < 10 && startFromHereHorizontal - i >= 0; i++) {
                 if (counter == 5) {
+                    if (numberOfTeam == 2) {
+                        if (getActiveTeam().getColorCode() == 1 && getActiveTeam().getSequence() == 0) {
+                            tempSequenceHolderForPlayer1 = localSequenceHolder;
+                        } else if (getActiveTeam().getColorCode() == 1 && getActiveTeam().getSequence() == 1) {
+                            return !Arrays.equals(localSequenceHolder, tempSequenceHolderForPlayer1);
+                        }
+                        if (getActiveTeam().getColorCode() == 2 && getActiveTeam().getSequence() == 0) {
+                            tempSequenceHolderForPlayer2 = localSequenceHolder;
+                        } else if (getActiveTeam().getColorCode() == 2 && getActiveTeam().getSequence() == 1) {
+                            return !Arrays.equals(localSequenceHolder, tempSequenceHolderForPlayer2);
+                        }
+                    }
                     break;
                 } else if (board.getColorCodesForChips()[startFromHereVertical + i][startFromHereHorizontal - i] == getActiveTeam().getColorCode()) {
+                    localSequenceHolder[counter] = new int[]{startFromHereVertical + i, startFromHereHorizontal - i};
                     counter++;
                 } else {
                     counter = 0;

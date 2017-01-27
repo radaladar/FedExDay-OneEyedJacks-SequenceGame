@@ -49,7 +49,7 @@ public class GameLogicTests {
                 {0, 1, 0, 1, 0, 1, 0, 0, 0, 1},
                 {0, 0, 0, 0, 1, 0, 0, 0, 1, 0},
                 {0, 0, 0, 0, 0, 1, 0, 1, 0, 0},
-                {0, 1, 0, 0, 0, 0, 1, 0, 0, 0},
+                {0, 1, 0, 1, 0, 0, 1, 0, 0, 0},
                 {0, 0, 0, 0, 0, 1, 0, 0, 0, 0}
         };
         GameLogic.round = 2;
@@ -104,6 +104,17 @@ public class GameLogicTests {
         game.getBoard().setColorCodesForChips(arrayForDiagonalTest);
         Assert.assertEquals(false, game.isWon());
         game.setLastMove(new int[]{1, 8});
+        Assert.assertEquals(false, game.isWon());
+    }
+
+    @Test
+    public void testIsWonWith2playersShouldFail2() {
+        GameLogic game = new GameLogic(2);
+        GameLogic.round = 12;
+        game.setLastMove(new int[]{4, 2});
+        game.getBoard().setColorCodesForChips(arrayForDiagonalTest);
+        Assert.assertEquals(false, game.isWon());
+        game.setLastMove(new int[]{3, 8});
         Assert.assertEquals(false, game.isWon());
     }
 
