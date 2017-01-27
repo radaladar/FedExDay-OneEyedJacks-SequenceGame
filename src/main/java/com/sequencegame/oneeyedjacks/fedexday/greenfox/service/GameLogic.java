@@ -46,6 +46,27 @@ public class GameLogic {
             redTeam.setPlayers(new ArrayList<Player>(Arrays.asList(new Player())));
             numberOfTeam = 3;
         }
+        initialDeal();
+    }
+
+    private void initialDeal() {
+        for (Player player : greenTeam.getPlayers()) {
+            for (int i = 0; i < 6; i++) {
+                player.getHand().add(deck.drawCard());
+            }
+        }
+        for (Player player : blueTeam.getPlayers()) {
+            for (int i = 0; i < 6; i++) {
+                player.getHand().add(deck.drawCard());
+            }
+        }
+        if (redTeam != null) {
+            for (Player player : blueTeam.getPlayers()) {
+                for (int i = 0; i < 6; i++) {
+                    player.getHand().add(deck.drawCard());
+                }
+            }
+        }
     }
 
     public boolean isWon() {
