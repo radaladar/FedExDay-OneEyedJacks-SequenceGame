@@ -35,7 +35,7 @@
          <center>
             <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="164.0" prefWidth="141.0" spacing="15.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" onAction="#getBoardSceen" prefHeight="32.0" prefWidth="145.0" text="2 players" />
+                  <Button mnemonicParsing="false" onAction="#getBoardScreen" prefHeight="32.0" prefWidth="145.0" text="2 players" />
                   <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="3 players" />
                   <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="4 players" />
                   <Button alignment="CENTER" mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="6 players" />

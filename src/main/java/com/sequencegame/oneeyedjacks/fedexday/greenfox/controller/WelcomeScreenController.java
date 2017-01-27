@@ -16,7 +16,7 @@ public class WelcomeScreenController {
     private SequencegameApplication main;
 
     @FXML
-    public void getBoardSceen() throws IOException {
+    public void getBoardScreen() throws IOException {
             main.showMainScreen();
     }
 
