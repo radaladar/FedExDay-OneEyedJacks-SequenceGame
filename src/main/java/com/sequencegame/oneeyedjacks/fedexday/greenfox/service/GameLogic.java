@@ -129,12 +129,12 @@ public class GameLogic {
                     if (getActiveTeam().getColorCode() == 1 && getActiveTeam().getSequence() == 0) {
                         tempSequenceHolderForPlayer1 = localSequenceHolder;
                     } else if (getActiveTeam().getColorCode() == 1 && getActiveTeam().getSequence() == 1) {
-                        return !Arrays.equals(localSequenceHolder, tempSequenceHolderForPlayer1);
+                        return !isTwoArrayEqual(localSequenceHolder, tempSequenceHolderForPlayer1);
                     }
                     if (getActiveTeam().getColorCode() == 2 && getActiveTeam().getSequence() == 0) {
                         tempSequenceHolderForPlayer2 = localSequenceHolder;
                     } else if (getActiveTeam().getColorCode() == 2 && getActiveTeam().getSequence() == 1) {
-                        return !Arrays.equals(localSequenceHolder, tempSequenceHolderForPlayer2);
+                        return !isTwoArrayEqual(localSequenceHolder, tempSequenceHolderForPlayer2);
                     }
                 }
                 break;
@@ -143,10 +143,37 @@ public class GameLogic {
                 counter++;
             } else {
                 counter = 0;
-                Arrays.fill(localSequenceHolder, null);
+                if (countNonZeroElementOfAnArray(localSequenceHolder) != 5) {
+                    Arrays.fill(localSequenceHolder, null);
+                }
             }
         }
         return counter == 5;
+    }
+
+    private int countNonZeroElementOfAnArray(int[][] theArray) {
+        int counter = 0;
+        for (int i = 0; i < theArray.length; i++) {
+            if (theArray[i] != null) {
+                for (int j = 0; j < theArray[i].length; j++) {
+                    if (theArray[i][j] != 0) {
+                        counter++;
+                    }
+                }
+            }
+        }
+        return counter;
+    }
+
+    private boolean isTwoArrayEqual(int[][] array1, int[][] array2) {
+        for (int i = 0; i < array1.length; i++) {
+            for (int j = 0; j < array1[i].length; j++) {
+                if (array1[i][j] != array2[i][j]) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     private boolean checkVertical(int x) {
@@ -158,12 +185,12 @@ public class GameLogic {
                     if (getActiveTeam().getColorCode() == 1 && getActiveTeam().getSequence() == 0) {
                         tempSequenceHolderForPlayer1 = localSequenceHolder;
                     } else if (getActiveTeam().getColorCode() == 1 && getActiveTeam().getSequence() == 1) {
-                        return !Arrays.equals(localSequenceHolder, tempSequenceHolderForPlayer1);
+                        return !isTwoArrayEqual(localSequenceHolder, tempSequenceHolderForPlayer1);
                     }
                     if (getActiveTeam().getColorCode() == 2 && getActiveTeam().getSequence() == 0) {
                         tempSequenceHolderForPlayer2 = localSequenceHolder;
                     } else if (getActiveTeam().getColorCode() == 2 && getActiveTeam().getSequence() == 1) {
-                        return !Arrays.equals(localSequenceHolder, tempSequenceHolderForPlayer2);
+                        return !isTwoArrayEqual(localSequenceHolder, tempSequenceHolderForPlayer2);
                     }
                 }
                 break;
@@ -172,7 +199,9 @@ public class GameLogic {
                 counter++;
             } else {
                 counter = 0;
-                Arrays.fill(localSequenceHolder, null);
+                if (countNonZeroElementOfAnArray(localSequenceHolder) != 5) {
+                    Arrays.fill(localSequenceHolder, null);
+                }
             }
         }
         return counter == 5;
@@ -201,12 +230,12 @@ public class GameLogic {
                         if (getActiveTeam().getColorCode() == 1 && getActiveTeam().getSequence() == 0) {
                             tempSequenceHolderForPlayer1 = localSequenceHolder;
                         } else if (getActiveTeam().getColorCode() == 1 && getActiveTeam().getSequence() == 1) {
-                            return !Arrays.equals(localSequenceHolder, tempSequenceHolderForPlayer1);
+                            return !isTwoArrayEqual(localSequenceHolder, tempSequenceHolderForPlayer1);
                         }
                         if (getActiveTeam().getColorCode() == 2 && getActiveTeam().getSequence() == 0) {
                             tempSequenceHolderForPlayer2 = localSequenceHolder;
                         } else if (getActiveTeam().getColorCode() == 2 && getActiveTeam().getSequence() == 1) {
-                            return !Arrays.equals(localSequenceHolder, tempSequenceHolderForPlayer2);
+                            return !isTwoArrayEqual(localSequenceHolder, tempSequenceHolderForPlayer2);
                         }
                     }
                     break;
@@ -215,7 +244,9 @@ public class GameLogic {
                     counter++;
                 } else {
                     counter = 0;
-                    Arrays.fill(localSequenceHolder, null);
+                    if (countNonZeroElementOfAnArray(localSequenceHolder) != 5) {
+                        Arrays.fill(localSequenceHolder, null);
+                    }
                 }
             }
             return counter == 5;
@@ -241,12 +272,12 @@ public class GameLogic {
                         if (getActiveTeam().getColorCode() == 1 && getActiveTeam().getSequence() == 0) {
                             tempSequenceHolderForPlayer1 = localSequenceHolder;
                         } else if (getActiveTeam().getColorCode() == 1 && getActiveTeam().getSequence() == 1) {
-                            return !Arrays.equals(localSequenceHolder, tempSequenceHolderForPlayer1);
+                            return !isTwoArrayEqual(localSequenceHolder, tempSequenceHolderForPlayer1);
                         }
                         if (getActiveTeam().getColorCode() == 2 && getActiveTeam().getSequence() == 0) {
                             tempSequenceHolderForPlayer2 = localSequenceHolder;
                         } else if (getActiveTeam().getColorCode() == 2 && getActiveTeam().getSequence() == 1) {
-                            return !Arrays.equals(localSequenceHolder, tempSequenceHolderForPlayer2);
+                            return !isTwoArrayEqual(localSequenceHolder, tempSequenceHolderForPlayer2);
                         }
                     }
                     break;
@@ -255,6 +286,9 @@ public class GameLogic {
                     counter++;
                 } else {
                     counter = 0;
+                    if (countNonZeroElementOfAnArray(localSequenceHolder) != 5) {
+                        Arrays.fill(localSequenceHolder, null);
+                    }
                 }
             }
             return counter == 5;

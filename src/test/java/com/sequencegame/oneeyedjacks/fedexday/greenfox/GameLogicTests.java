@@ -10,6 +10,7 @@ public class GameLogicTests {
     private int[][] arrayForHorizontalTest;
     private int[][] arrayForVerticalTest;
     private int[][] arrayForDiagonalTest;
+    private int[][] arrayForRepeatedSequence;
 
     GameLogic gameLogic;
 
@@ -52,6 +53,18 @@ public class GameLogicTests {
                 {0, 1, 0, 1, 0, 0, 1, 0, 0, 0},
                 {0, 0, 0, 0, 0, 1, 0, 0, 0, 0}
         };
+        arrayForRepeatedSequence = new int[][]{
+                {0, 1, 0, 0, 1, 1, 1, 1, 1, 0},
+                {0, 0, 0, 1, 0, 1, 1, 0, 0, 0},
+                {0, 0, 1, 0, 1, 0, 0, 1, 1, 0},
+                {0, 1, 0, 1, 0, 0, 0, 1, 1, 0},
+                {1, 0, 1, 0, 0, 0, 1, 0, 0, 1},
+                {0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
+                {0, 0, 0, 0, 1, 0, 0, 0, 1, 0},
+                {0, 0, 0, 0, 0, 1, 0, 1, 0, 0},
+                {0, 1, 0, 1, 0, 0, 0, 0, 0, 0},
+                {1, 1, 1, 1, 1, 0, 0, 0, 0, 0}
+        };
         GameLogic.round = 2;
 
     }
@@ -78,10 +91,10 @@ public class GameLogicTests {
     public void testIsWonWith2playersPass() {
         GameLogic game = new GameLogic(2);
         GameLogic.round = 12;
-        game.setLastMove(new int[]{8, 6});
-        game.getBoard().setColorCodesForChips(arrayForDiagonalTest);
-        Assert.assertEquals(false, game.isWon());
         game.setLastMove(new int[]{4, 0});
+        game.getBoard().setColorCodesForChips(arrayForRepeatedSequence);
+        Assert.assertEquals(false, game.isWon());
+        game.setLastMove(new int[]{1, 5});
         Assert.assertEquals(true, game.isWon());
     }
 
@@ -89,10 +102,10 @@ public class GameLogicTests {
     public void testIsWonWith2playersFail() {
         GameLogic game = new GameLogic(2);
         GameLogic.round = 12;
-        game.setLastMove(new int[]{8, 6});
-        game.getBoard().setColorCodesForChips(arrayForDiagonalTest);
+        game.setLastMove(new int[]{4, 0});
+        game.getBoard().setColorCodesForChips(arrayForRepeatedSequence);
         Assert.assertEquals(false, game.isWon());
-        game.setLastMove(new int[]{1, 5});
+        game.setLastMove(new int[]{4, 6});
         Assert.assertEquals(false, game.isWon());
     }
 
@@ -100,22 +113,22 @@ public class GameLogicTests {
     public void testIsWonWith2playersShouldFail() {
         GameLogic game = new GameLogic(2);
         GameLogic.round = 12;
-        game.setLastMove(new int[]{4, 2});
-        game.getBoard().setColorCodesForChips(arrayForDiagonalTest);
+        game.setLastMove(new int[]{4, 0});
+        game.getBoard().setColorCodesForChips(arrayForRepeatedSequence);
         Assert.assertEquals(false, game.isWon());
-        game.setLastMove(new int[]{1, 8});
+        game.setLastMove(new int[]{2, 0});
         Assert.assertEquals(false, game.isWon());
     }
 
     @Test
-    public void testIsWonWith2playersShouldFail2() {
+    public void testIsWonWith2playersCornerPass() {
         GameLogic game = new GameLogic(2);
         GameLogic.round = 12;
-        game.setLastMove(new int[]{4, 2});
-        game.getBoard().setColorCodesForChips(arrayForDiagonalTest);
+        game.setLastMove(new int[]{0, 9});
+        game.getBoard().setColorCodesForChips(arrayForRepeatedSequence);
         Assert.assertEquals(false, game.isWon());
-        game.setLastMove(new int[]{3, 8});
-        Assert.assertEquals(false, game.isWon());
+        game.setLastMove(new int[]{4, 0});
+        Assert.assertEquals(true, game.isWon());
     }
 
     @Test
