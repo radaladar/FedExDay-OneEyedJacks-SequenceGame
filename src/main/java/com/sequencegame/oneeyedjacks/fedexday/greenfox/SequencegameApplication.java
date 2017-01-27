@@ -5,20 +5,10 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
 
-import java.io.IOException;
-
-@SpringBootApplication
 public class SequencegameApplication extends Application {
 
-    private ConfigurableApplicationContext springContext;
-    private BorderPane welcomeNode;
-    private BorderPane boardNode;
 
     public static void main(String[] args) {
         Application.launch(args);
@@ -26,23 +16,11 @@ public class SequencegameApplication extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		stage.setScene(new Scene(welcomeNode));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Welcome.fxml"));
+        Parent parent = fxmlLoader.load();
+        Scene scene = new Scene(parent);
+		stage.setScene(scene);
 		stage.show();
 		stage.setOnCloseRequest(e -> Platform.exit());
-	}
-
-	@Override
-	public void init() throws Exception {
-		springContext = SpringApplication.run(SequencegameApplication.class);
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Welcome.fxml"));
-		fxmlLoader.setControllerFactory(springContext::getBean);
-		welcomeNode = fxmlLoader.load();
-	}
-
-
-	public void showMainSceen() throws IOException {
-		FXMLLoader mainSceenLoader = new FXMLLoader(getClass().getResource("/fxml/Board.fxml"));
-		mainSceenLoader.setControllerFactory(springContext::getBean);
-		boardNode = mainSceenLoader.load();
 	}
 }
