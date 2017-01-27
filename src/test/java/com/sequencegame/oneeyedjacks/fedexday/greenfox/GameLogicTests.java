@@ -46,14 +46,65 @@ public class GameLogicTests {
                 {0, 0, 1, 0, 1, 0, 0, 1, 1, 0},
                 {0, 1, 0, 1, 0, 0, 0, 1, 1, 0},
                 {1, 0, 1, 0, 0, 0, 1, 0, 0, 1},
-                {0, 0, 0, 1, 0, 1, 0, 0, 0, 1},
+                {0, 1, 0, 1, 0, 1, 0, 0, 0, 1},
                 {0, 0, 0, 0, 1, 0, 0, 0, 1, 0},
                 {0, 0, 0, 0, 0, 1, 0, 1, 0, 0},
-                {0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
+                {0, 1, 0, 0, 0, 0, 1, 0, 0, 0},
                 {0, 0, 0, 0, 0, 1, 0, 0, 0, 0}
         };
         GameLogic.round = 2;
 
+    }
+
+    @Test
+    public void testIsWonWith3playersPass() {
+        GameLogic game = new GameLogic(3);
+        GameLogic.round = 12;
+        game.setLastMove(new int[]{8, 6});
+        game.getBoard().setColorCodesForChips(arrayForDiagonalTest);
+        Assert.assertEquals(true, game.isWon());
+    }
+
+    @Test
+    public void testIsWonWith3playersFails() {
+        GameLogic game = new GameLogic(3);
+        GameLogic.round = 12;
+        game.setLastMove(new int[]{1, 8});
+        game.getBoard().setColorCodesForChips(arrayForDiagonalTest);
+        Assert.assertEquals(false, game.isWon());
+    }
+
+    @Test
+    public void testIsWonWith2playersPass() {
+        GameLogic game = new GameLogic(2);
+        GameLogic.round = 12;
+        game.setLastMove(new int[]{8, 6});
+        game.getBoard().setColorCodesForChips(arrayForDiagonalTest);
+        Assert.assertEquals(false, game.isWon());
+        game.setLastMove(new int[]{4, 0});
+        Assert.assertEquals(true, game.isWon());
+    }
+
+    @Test
+    public void testIsWonWith2playersFail() {
+        GameLogic game = new GameLogic(2);
+        GameLogic.round = 12;
+        game.setLastMove(new int[]{8, 6});
+        game.getBoard().setColorCodesForChips(arrayForDiagonalTest);
+        Assert.assertEquals(false, game.isWon());
+        game.setLastMove(new int[]{1, 5});
+        Assert.assertEquals(false, game.isWon());
+    }
+
+    @Test
+    public void testIsWonWith2playersShouldFail() {
+        GameLogic game = new GameLogic(2);
+        GameLogic.round = 12;
+        game.setLastMove(new int[]{4, 2});
+        game.getBoard().setColorCodesForChips(arrayForDiagonalTest);
+        Assert.assertEquals(false, game.isWon());
+        game.setLastMove(new int[]{1, 8});
+        Assert.assertEquals(false, game.isWon());
     }
 
     @Test

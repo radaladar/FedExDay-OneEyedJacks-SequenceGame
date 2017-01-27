@@ -19,7 +19,7 @@ public class GameLogic {
     private Deck deck;
     private int numberOfTeam;
     private int[] lastMove;
-    public static int round;
+    public static int round = 0;
 
     public GameLogic(int numberOfPlayer) {
         board = new Board();
@@ -85,20 +85,20 @@ public class GameLogic {
     }
 
     private void placeChipsOnCorners() {
-        placeChip(0, 0);
-        placeChip(0, 9);
-        placeChip(9, 0);
-        placeChip(9, 9);
+        board.placeChip(0, 0, getActiveTeam().getColorCode());
+        board.placeChip(0, 9, getActiveTeam().getColorCode());
+        board.placeChip(9, 0, getActiveTeam().getColorCode());
+        board.placeChip(9, 9, getActiveTeam().getColorCode());
     }
 
     private void clearCorners() {
-        removeChip(0, 0);
-        removeChip(0, 9);
-        removeChip(9, 0);
-        removeChip(9, 9);
+        board.placeChip(0, 0, 0);
+        board.placeChip(0, 9, 0);
+        board.placeChip(9, 0, 0);
+        board.placeChip(9, 9, 0);
     }
 
-    public boolean isDumpingDeadCardAllowed(int index) {
+    private boolean isDumpingDeadCardAllowed(int index) {
         Card card = getActiveTeam().getActivePlayer().getHand().get(index);
         int[][] placesTocheck = board.findCardOnBoard(card.toString());
         return board.isCardisOccupied(placesTocheck[0][0], placesTocheck[0][1]) && board.isCardisOccupied(placesTocheck[1][0], placesTocheck[1][1]);
