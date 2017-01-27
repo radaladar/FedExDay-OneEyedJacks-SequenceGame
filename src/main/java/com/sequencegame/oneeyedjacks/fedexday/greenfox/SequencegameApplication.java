@@ -40,9 +40,9 @@ public class SequencegameApplication extends Application {
 	}
 
 
-	public void showMainSceen() throws IOException {
-		FXMLLoader mainSceenLoader = new FXMLLoader(getClass().getResource("/fxml/Board.fxml"));
-		mainSceenLoader.setControllerFactory(springContext::getBean);
-		boardNode = mainSceenLoader.load();
+	public void showMainScreen() throws IOException {
+		FXMLLoader mainScreenLoader = new FXMLLoader(getClass().getResource("/fxml/Board.fxml"));
+		mainScreenLoader.setControllerFactory(springContext::getBean);
+		boardNode = mainScreenLoader.load();
 	}
 }
